@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST" class="mb-4">
+    <div class="mb-3">
+        <label for="tahun" class="form-label">Tahun Prediksi</label>
+        <input type="number" class="form-control" id="tahun" name="tahun" required>
+    </div>
+    <div class="mb-3">
+        <label for="kabupaten" class="form-label">Kabupaten/Kota</label>
+        <select class="form-select" id="kabupaten" name="kabupaten" required>
+            {% for kab in kabupaten_list %}
+                <option value="{{ kab }}">{{ kab }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Prediksi</button>
+</form>
+
+{% if hasil is not none %}
+<div class="alert alert-info">
+    <strong>Hasil Prediksi:</strong> {{ hasil }}%
+</div>
+<div class="mt-4">
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Grafik Prediksi" class="img-fluid">
+</div>
+{% endif %}
+{% endblock %}
